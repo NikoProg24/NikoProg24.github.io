@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  base: '/MyPortfolio', 
+  base: '/NikoProg24.github.io', 
   build: {
     outDir: 'dist', 
   },
