@@ -1,18 +1,21 @@
-name: Deploy Vite Project
+name: Deploy Vite to GitHub Pages
 
 on:
   push:
     branches:
-      - main  
+      - main  # Körs vid push till main
+
+permissions:
+  contents: write  # Ger rätt att pusha ändringar
 
 jobs:
-  deploy:
+  build-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout repo
         uses: actions/checkout@v4
-
+      
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -25,7 +28,8 @@ jobs:
         run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # Se till att detta är rätt byggmapp
+          branch: gh-pages
+          folder: dist
+          token: ${{ secrets.GITHUB_TOKEN }}
